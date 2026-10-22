@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ski Trip 2027 · Jay Peak vs. Lake Placid</title>
+  <meta name="description" content="Friends ski trip, Feb 19–22, 2027. Two options: Jay Peak, VT or Lake Placid / Whiteface, NY.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7fa;
+      --paper: #ffffff;
+      --ink: #14212e;
+      --muted: #5b6b7b;
+      --line: #dbe3ea;
+      --jay: #1f6f8b;       /* Jay Peak: deep teal */
+      --jay-soft: #e3f1f5;
+      --wf: #8a3b2e;        /* Whiteface: brick */
+      --wf-soft: #f6e8e4;
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e151c; --paper: #16212b; --ink: #e8eef3; --muted: #9aabbb; --line: #253442;
+        --jay: #5fb4d0; --jay-soft: #16303a; --wf: #e08a77; --wf-soft: #3a211c;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font: 16px/1.6 Inter, system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+    h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0 0 .4em; }
+
+    /* Hero */
+    header.hero {
+      padding: 72px 0 48px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,.18), transparent 50%),
+        linear-gradient(160deg, #1c3448 0%, #2d5670 55%, #7fa6bd 100%);
+      color: #fff;
+    }
+    .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 600; opacity: .85; }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 800; margin-top: .3em; }
+    .hero p.lede { font-size: 1.15rem; max-width: 40em; opacity: .92; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); padding: 6px 12px; border-radius: 999px; font-size: .9rem; }
+
+    nav.jump { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
+    nav.jump .wrap { display: flex; gap: 20px; overflow-x: auto; padding-top: 12px; padding-bottom: 12px; font-size: .92rem; font-weight: 500; }
+    nav.jump a { text-decoration: none; color: var(--muted); white-space: nowrap; }
+    nav.jump a:hover { color: var(--ink); }
+
+    section { padding: 56px 0 8px; }
+    section > .wrap > h2 { font-size: 1.9rem; }
+    .sub { color: var(--muted); margin-top: -4px; margin-bottom: 24px; }
+
+    /* Option cards */
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .top { min-height: 194px;}
+    .card .top { padding: 24px 24px 18px; }
+    .card.jay .top { background: var(--jay-soft); border-top: 6px solid var(--jay); }
+    .card.wf  .top { background: var(--wf-soft);  border-top: 6px solid var(--wf); }
+    .card .tag { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .card.jay .tag { color: var(--jay); }
+    .card.wf .tag { color: var(--wf); }
+    .card h3 { font-size: 1.7rem; margin-top: .25em; }
+    .card .pitch { margin: 0; color: var(--muted); }
+    .card .body { padding: 20px 24px 24px; flex: 1; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+    .stat { border: 1px solid var(--line); border-radius: 10px; padding: 10px; text-align: center; }
+    .stat b { display: block; font-family: Fraunces, Georgia, serif; font-size: 1.3rem; }
+    .stat span { font-size: .78rem; color: var(--muted); }
+    .card h4 { margin: 18px 0 6px; font-size: .95rem; }
+    .card ul { margin: 0; padding-left: 1.1em; }
+    .card li { margin: 3px 0; }
+
+    /* Fill-in placeholders */
+    .tbd {
+      background: repeating-linear-gradient(45deg, transparent 0 6px, rgba(127,127,127,.08) 6px 12px);
+      border: 1px dashed var(--line); border-radius: 8px; padding: 2px 8px; color: var(--muted); font-style: italic;
+    }
+
+    /* Lodging blocks */
+    .stay { border: 1px solid var(--line); border-left: 4px solid; border-radius: 10px; padding: 14px 16px; }
+    .stay.jay { border-left-color: var(--jay); }
+    .stay.wf { border-left-color: var(--wf); }
+    .gallery { margin: -2px 0 14px; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; aspect-ratio: 16 / 9; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; background: var(--line); }
+    .gallery .main { grid-row: 1 / 3; }
+    .gallery.single { display: block; }
+    .gallery.single img { aspect-ratio: 16 / 9; }
+    .stay-name { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 1.1rem; }
+    .stay-meta { color: var(--muted); font-size: .85rem; margin-bottom: 8px; }
+    .stay ul { font-size: .93rem; }
+    .stay-link { display: inline-block; margin-top: 10px; font-weight: 600; font-size: .9rem; text-decoration: none; }
+    .stay.jay .stay-link { color: var(--jay); }
+    .stay.wf .stay-link { color: var(--wf); }
+    .stay-link:hover { text-decoration: underline; }
+
+    /* Comparison table */
+    .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    thead th { font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    thead th.jay { color: var(--jay); }
+    thead th.wf { color: var(--wf); }
+    td:first-child { font-weight: 600; width: 22%; }
+
+    /* Weekend */
+    .days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .day { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+    .day .d { font-family: Fraunces, Georgia, serif; font-size: 1.15rem; font-weight: 600; }
+    .day .date { color: var(--muted); font-size: .85rem; margin-bottom: 8px; }
+    .day p { margin: 6px 0; font-size: .93rem; }
+    .day .who { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    .day .who.j { color: var(--jay); }
+    .day .who.w { color: var(--wf); }
+
+    /* Vote */
+    .vote { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; gap: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 20px; border-radius: 10px; font-weight: 600; text-decoration: none; color: #fff; background: #2d5670; }
+    .btn:hover { filter: brightness(1.1); }
+
+    footer { padding: 48px 0 64px; color: var(--muted); font-size: .85rem; }
+    footer ul { padding-left: 1.1em; }
+
+    @media (max-width: 760px) {
+      .options { grid-template-columns: 1fr; }
+      .days { grid-template-columns: 1fr 1fr; }
+      header.hero { padding: 52px 0 36px; }
+    }
+    @media (max-width: 420px) {
+      .days { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Friends Ski Trip · Winter 2027</div>
+      <h1>Jay Peak or Lake Placid?</h1>
+      <p class="lede">Four days, two great mountains, one decision. Here's everything side by side so we can pick and start booking. Yeah bruh, an AI wrote this ;)</p>
+      <div class="chips">
+        <span class="chip">📅 Fri Feb 19 – Mon Feb 22, 2027</span>
+        <span class="chip">🏔️ 2 options</span>
+        <!-- EDIT: group size -->
+        <span class="chip">👥 <span class="tbd" style="color:inherit;border-color:rgba(255,255,255,.4)">Josh, Bernie, Adam, Craig, Steven, Eri, Keisha, Mark, Kennedy, Ryan, Wilcon, Travis, EMILY!, Dannnn????</span></span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="jump">
+    <div class="wrap">
+      <a href="#options">The options</a>
+      <a href="#compare">Side by side</a>
+      <a href="#weekend">The weekend</a>
+      <a href="#vote">Vote</a>
+    </div>
+  </nav>
+
+  <!-- ============ OPTIONS ============ -->
+  <section id="options">
+    <div class="wrap">
+      <h2>The options</h2>
+      <p class="sub">Both are big-mountain trips by Northeast standards. They're different kinds of weekends, though.</p>
+
+      <div class="options">
+        <!-- JAY PEAK -->
+        <article class="card jay">
+          <div class="top">
+            <div class="tag">Option A · Jay, Vermont</div>
+            <h3>Jay Peak</h3>
+            <p class="pitch">The snowiest mountain in the East, tree skiing everywhere, and an indoor waterpark for when your legs are done.</p>
+          </div>
+          <div class="body">
+            <h2>Cost</h2>
+            <h3>$737 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4> Jay Peak forces you to buy a package that includes lodging + lift tickets. Keisha, if you want to join and not ski, you can get a discount ;)</p>
+            <h4>Why go</h4>
+            <ul>
+              <li>Known for deep snow and a boundary-to-boundary glade policy</li>
+              <li>Vermont's only aerial tram, straight to the 3,968′ summit</li>
+              <li>Everything's at the base: slopeside hotels, the Pump House indoor waterpark, an ice arena. A true, self-contained resort.</li>
+            </ul>
+
+            <h4>Trade-offs</h4>
+            <ul>
+              <li>Long drive... plan for at least 6 hours from NYC</li>
+              <li>Après and dining are mostly on-resort</li>
+              <li>Can be cold and windy up top in February</li>
+            </ul>
+
+            <h4>Where we'd stay</h4>
+            <div class="stay jay">
+              <figure class="gallery single">
+                <img src="images/jay-village-townhouse.jpg" alt="Jay Peak Village townhouse in the snow" loading="lazy">
+              </figure>
+              <div class="stay-name">Village 4-Bedroom Townhouse</div>
+              <div class="stay-meta">Managed by Jay Peak · South Village</div>
+              <ul>
+                <li><b>Ski-in / ski-out</b>, on the Grammy Jay and Raccoon Run trails</li>
+                <li>4 bedrooms; the resort's 4BR Village units, technically sleeps 10, but I bet we could stretch it ;) Overflow would in a supplementary condo or hotel rooom on the resort grounds.</li>
+                <li>Full kitchen, multiple living areas, private ski locker</li>
+                <li><b>Overflow:</b> an extra hotel room on the resort if we need more beds.</li>
+              </ul>
+              <a class="stay-link" href="https://jaypeakresort.com/trip-planning/lodging/south-village-condominiums-townhomes" target="_blank" rel="noopener">See the Village townhomes →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- LAKE PLACID / WHITEFACE -->
+        <article class="card wf">
+          <div class="top">
+            <div class="tag">Option B · Lake Placid, New York</div>
+            <h3>Lake Placid / Whiteface</h3>
+            <p class="pitch">Biggest vertical in the East, plus a real Olympic town with a walkable main street and lots to do off the mountain.</p>
+          </div>
+          <div class="body">
+            <h2>Cost</h2>
+            <h3>$678 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4> Breakdown = $419pp for lodging + $259 for two day lift ticket. This math is based off of 13 people. The total price of the lodging would be $5446, so the more people the cheaper this becomes. Again, Keisha, if you don't want to ski, you obviosuly just need to pay the $419 for lodging.</p>
+            <h4>Why go</h4>
+            <ul>
+              <li>Longest, steepest-feeling runs in the Northeast</li>
+              <li>Lake Placid is a proper town: restaurants, bars, shops on Main Street</li>
+              <li>Non-ski fun: bobsled rides at Mt. Van Hoevenberg, the toboggan chute onto Mirror Lake, skating on the Olympic Oval, the Olympic Museum</li>
+              <li>Great for anyone in the group who doesn't ski much</li>
+            </ul>
+
+            <h4>Trade-offs</h4>
+            <ul>
+              <li>Not ski-in/ski-out: a short drive to the mountain each day, and ~20 min into Lake Placid for dinners out</li>
+              <li>Exposed summit can be icy and windy</li>
+            </ul>
+
+            <h4>Where we'd stay</h4>
+            <div class="stay wf">
+              <!-- Photos are linked from the Airbnb listing. If they ever stop loading, save copies into images/ and point these at them. -->
+              <figure class="gallery">
+                <img class="main" src="https://a0.muscache.com/im/pictures/hosting/Hosting-2933764/original/3e9597c7-f8df-498d-9a7a-656f099f7d4a.png?im_w=720" alt="Grand Ebs View Lodge exterior" loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-2933764/original/2b7d95df-f975-4773-96b7-3a2b61ad1e2d.png?im_w=720" alt="Great room with tall windows" loading="lazy" referrerpolicy="no-referrer">
+                <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-2933764/original/237e58f7-3707-4317-9556-8ad0db6edf2b.png?im_w=720" alt="Main-floor king bedroom" loading="lazy" referrerpolicy="no-referrer">
+              </figure>
+              <div class="stay-name">Grand Ebs View Lodge</div>
+              <div class="stay-meta">Airbnb · Jay, NY · ★ 5.0 (55 reviews) · Superhost</div>
+              <ul>
+                <li><b>6 bedrooms, 10 beds, 4.5 baths</b>; sleeps the whole group under one roof</li>
+                <li>7-person hot tub with mountain views, sauna, big stone fireplace</li>
+                <li>Full kitchen, 3 washer/dryers, free parking</li>
+                <li>~10 min drive to Whiteface, ~20 min drive to Lake Placid village</li>
+              </ul>
+              <a class="stay-link" href="https://www.airbnb.com/rooms/2933764?check_in=2027-02-19&amp;check_out=2027-02-22" target="_blank" rel="noopener">View on Airbnb →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section id="compare">
+    <div class="wrap">
+      <h2>Side by side</h2>
+      <p class="sub">Drive times are rough, without traffic or snow. Ticket prices are last season's window rates; both resorts price dynamically, so buying online early is cheaper.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="jay">Jay Peak</th>
+              <th class="wf">Lake Placid / Whiteface</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Vibe</td><td>Remote powder hunt, ski-in/ski-out, waterpark</td><td>Olympic village, big groomers, town nightlife</td></tr>
+            <tr><td>Vertical</td><td>2,153 ft</td><td>3,430 ft</td></tr>
+            <tr><td>Best for</td><td>Tree skiing, fresh snow, rest days at the waterpark</td><td>Long cruisers, mixed-ability groups, non-skiers</td></tr>
+            <tr><td>Drive time from NYC</td><td>~6 hr</td><td>~5 hr</td></tr>
+            <tr><td>Lodging</td><td>Resort-managed Village 4BR townhouse, ski-in/ski-out (+ hotel room if needed)</td><td>6BR Airbnb lodge in nearby town with hot tub &amp; sauna</td></tr>
+            <tr><td>To the lifts</td><td>Ski out the door</td><td>~10 min drive</td></tr>
+            <tr><td>Everyone together?</td><td>Most people in the townhouse; overflow in a hotel room which would be at the same resort / on the grounds</td><td>Yes, one house</td></tr>
+            <tr><td>Est. cost / person</td><td><span class="tbd">$737 (plus cost of ski / board rental + transportation)</span></td><td><span class="tbd">$678 (plus cost of ski / board rental + transportation)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEEKEND ============ -->
+  <!-- <section id="weekend">
+    <div class="wrap">
+      <h2>The weekend</h2>
+      <p class="sub">A rough shape for the four days. Nothing's locked in.</p>
+
+      <div class="days">
+        <div class="day">
+          <div class="d">Friday</div>
+          <div class="date">Feb 19</div>
+          <p>Drive up, check in, group dinner.</p>
+          <p class="who j">Jay</p><p>Waterpark night</p>
+          <p class="who w">Placid</p><p>Cook in, hot tub under the stars</p>
+        </div>
+        <div class="day">
+          <div class="d">Saturday</div>
+          <div class="date">Feb 20</div>
+          <p>Full ski day.</p>
+          <p class="who j">Jay</p><p>Tram laps, glades if it's snowed</p>
+          <p class="who w">Placid</p><p>Whiteface top to bottom, then après in town</p>
+        </div>
+        <div class="day">
+          <div class="d">Sunday</div>
+          <div class="date">Feb 21</div>
+          <p>Ski, or take a mix-it-up day.</p>
+          <p class="who j">Jay</p><p>Ski, ice arena, or rest</p>
+          <p class="who w">Placid</p><p>Bobsled, toboggan chute, skating, dinner on Main Street</p>
+        </div>
+        <div class="day">
+          <div class="d">Monday</div>
+          <div class="date">Feb 22</div>
+          <p>Morning laps, pack up, head home.</p>
+          <p class="who j">Jay</p><p>Monday crowds should be light</p>
+          <p class="who w">Placid</p><p>Same; Whiteface quiets down too</p>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:18px">Heads-up: these dates fall the week <em>after</em> Presidents' Week (Feb 15–18). That should mean thinner crowds, but check for holiday pricing or lodging minimums when booking.</p>
+    </div>
+  </section> -->
+
+  <footer>
+    <div class="wrap">
+      <p>Resort stats and prices change; double-check before booking.</p>
+      <ul>
+        <li><a href="https://jaypeakresort.com/">Jay Peak Resort</a></li>
+        <li><a href="https://whiteface.com/">Whiteface Mountain</a></li>
+        <li><a href="https://lakeplacid.com/">Visit Lake Placid</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

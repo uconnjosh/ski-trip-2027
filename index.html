@@ -51,6 +51,38 @@
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .chip { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); padding: 6px 12px; border-radius: 999px; font-size: .9rem; }
 
+    /* Faceoff */
+    .faceoff {
+      position: relative; margin-top: 32px; height: clamp(230px, 36vw, 380px);
+      border-radius: 16px; overflow: hidden; background: #fff;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .fighter { position: absolute; inset: 0; margin: 0; }
+    .fighter img { position: absolute; top: 0; height: 100%; width: 58%; object-fit: cover; }
+    .fighter.jay { clip-path: polygon(0 0, 55.6% 0, 43.6% 100%, 0 100%); }
+    .fighter.jay img { left: 0; object-position: 35% 40%; }
+    .fighter.wf { clip-path: polygon(56.4% 0, 100% 0, 100% 100%, 44.4% 100%); }
+    .fighter.wf img { right: 0; object-position: 55% 45%; }
+    .fighter::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,16,24,.82) 0%, rgba(8,16,24,.15) 45%, transparent 70%); }
+    .fighter figcaption { position: absolute; bottom: 18px; z-index: 1; display: flex; flex-direction: column; gap: 2px; max-width: 42%; }
+    .fighter.jay figcaption { left: 20px; }
+    .fighter.wf figcaption { right: 20px; align-items: flex-end; text-align: right; }
+    .fighter b { font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: clamp(1.4rem, 4vw, 2.4rem); line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+    .fighter .corner { align-self: flex-start; font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: #1f6f8b; }
+    .fighter.wf .corner { align-self: flex-end; background: #8a3b2e; }
+    .fighter .tale { font-size: .85rem; opacity: .9; }
+    .vs {
+      position: absolute; left: 50%; top: 50%; z-index: 2; transform: translate(-50%, -50%) rotate(-8deg);
+      width: clamp(58px, 9vw, 84px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+      background: #fff; color: #14212e; font-family: Fraunces, Georgia, serif; font-weight: 800; font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.35), 0 8px 24px rgba(0,0,0,.45);
+    }
+    @media (max-width: 520px) {
+      .fighter .tale { display: none; }
+      .fighter.jay figcaption { left: 14px; }
+      .fighter.wf figcaption { right: 14px; }
+    }
+
     nav.jump { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
     nav.jump .wrap { display: flex; gap: 20px; overflow-x: auto; padding-top: 12px; padding-bottom: 12px; font-size: .92rem; font-weight: 500; }
     nav.jump a { text-decoration: none; color: var(--muted); white-space: nowrap; }
@@ -159,6 +191,27 @@
         <!-- EDIT: group size -->
         <span class="chip">👥 <span class="tbd" style="color:inherit;border-color:rgba(255,255,255,.4)">Josh, Bernie, Adam, Craig, Steven, Eri, Keisha, Mark, Kennedy, Ryan, Wilcon, Travis, EMILY!, Dannnn????</span></span>
       </div>
+
+      <!-- FACEOFF: photos from Wikimedia Commons, credited in the footer -->
+      <div class="faceoff" role="img" aria-label="Jay Peak versus Whiteface Mountain">
+        <figure class="fighter jay">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Jay_Peak.JPG" alt="" loading="eager" referrerpolicy="no-referrer">
+          <figcaption>
+            <span class="corner">Vermont</span>
+            <b>Jay Peak</b>
+            <span class="tale">2,153′ vert · aerial tram · glades</span>
+          </figcaption>
+        </figure>
+        <figure class="fighter wf">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Whiteface_Mountain_from_near_Franklin_Falls_NY.jpg/1280px-Whiteface_Mountain_from_near_Franklin_Falls_NY.jpg" alt="" loading="eager" referrerpolicy="no-referrer">
+          <figcaption>
+            <span class="corner">New York</span>
+            <b>Whiteface</b>
+            <span class="tale">3,430′ vert · 2× Olympic host</span>
+          </figcaption>
+        </figure>
+        <div class="vs" aria-hidden="true">VS</div>
+      </div>
     </div>
   </header>
 
@@ -166,8 +219,6 @@
     <div class="wrap">
       <a href="#options">The options</a>
       <a href="#compare">Side by side</a>
-      <a href="#weekend">The weekend</a>
-      <a href="#vote">Vote</a>
     </div>
   </nav>
 
@@ -187,7 +238,7 @@
           </div>
           <div class="body">
             <h2>Cost</h2>
-            <h3>$737 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4> Jay Peak forces you to buy a package that includes lodging + lift tickets. Keisha, if you want to join and not ski, you can get a discount ;)</p>
+            <h3>$737 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4><p>Jay Peak forces you to buy a package that includes lodging + lift tickets. Keisha, if you want to join and not ski, you can get a discount ;)</p>
             <h4>Why go</h4>
             <ul>
               <li>Known for deep snow and a boundary-to-boundary glade policy</li>
@@ -229,7 +280,7 @@
           </div>
           <div class="body">
             <h2>Cost</h2>
-            <h3>$678 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4> Breakdown = $419pp for lodging + $259 for two day lift ticket. This math is based off of 13 people. The total price of the lodging would be $5446, so the more people the cheaper this becomes. Again, Keisha, if you don't want to ski, you obviosuly just need to pay the $419 for lodging.</p>
+            <h3>$678 per person <span style="font-size: 1rem;">(estimated, this doesn't include ski rentals or transportation from NYC)</span></h3><h4>for lodging and a two day lift ticket.</h4><p>Breakdown = $419pp for lodging + $259 for two day lift ticket. This math is based off of 13 people. The total price of the lodging would be $5446, so the more people the cheaper this becomes. Again, Keisha, if you don't want to ski, you obviosuly just need to pay the $419 for lodging.</p>
             <h4>Why go</h4>
             <ul>
               <li>Longest, steepest-feeling runs in the Northeast</li>
@@ -291,7 +342,7 @@
             <tr><td>Lodging</td><td>Resort-managed Village 4BR townhouse, ski-in/ski-out (+ hotel room if needed)</td><td>6BR Airbnb lodge in nearby town with hot tub &amp; sauna</td></tr>
             <tr><td>To the lifts</td><td>Ski out the door</td><td>~10 min drive</td></tr>
             <tr><td>Everyone together?</td><td>Most people in the townhouse; overflow in a hotel room which would be at the same resort / on the grounds</td><td>Yes, one house</td></tr>
-            <tr><td>Est. cost / person</td><td><span class="tbd">$737 (plus cost of ski / board rental + transportation)</span></td><td><span class="tbd">$678 (plus cost of ski / board rental + transportation)</span></td></tr>
+            <tr><td>Est. cost / person</td><td>$737 (plus cost of ski / board rental + transportation)</td><td>$678 (plus cost of ski / board rental + transportation)</td></tr>
           </tbody>
         </table>
       </div>
@@ -346,6 +397,10 @@
         <li><a href="https://whiteface.com/">Whiteface Mountain</a></li>
         <li><a href="https://lakeplacid.com/">Visit Lake Placid</a></li>
       </ul>
+      <p>Header photos via Wikimedia Commons:
+        <a href="https://commons.wikimedia.org/wiki/File:Jay_Peak.JPG">Jay Peak</a> by HanumanIX (public domain);
+        <a href="https://commons.wikimedia.org/wiki/File:Whiteface_Mountain_from_near_Franklin_Falls_NY.jpg">Whiteface Mountain</a> by Mwanner,
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</p>
     </div>
   </footer>
 
